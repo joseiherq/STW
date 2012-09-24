@@ -23,27 +23,19 @@ get '/throw/:type' do
 
   if @player_throw == @computer_throw 
     @answer = "There is a tie"
-    erb :index
+    erb :result
   elsif @player_throw == @defeat[@computer_throw]
     @answer = "Computer wins; #{@computer_throw} defeats #{@player_throw}"
-    erb :index
+    erb :result
   else
     @answer = "Well done. #{@player_throw} beats #{@computer_throw}"
-    erb :index
+    erb :result
   end
 end
 
+post '/' do
+  @tirada = params[:eleccion]
+  redirect "/throw/#{@tirada}"
+end
 
-__END__
 
-@@index
-<html>
-  <head>
-    <title>Rock Paper Scissors</title>
-  </head>
-  <body>
-    <h2> Computer chooses:  <%= @computer_throw %> </h2>
-    <h2> You choose: <%= @player_throw %> </h2>
-    <h1> <%= @answer %> </h1>
-  </body>
-</html>
