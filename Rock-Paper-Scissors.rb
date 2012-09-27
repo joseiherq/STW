@@ -13,6 +13,7 @@ get '/' do
   erb :form
 end
 
+
 get '/throw/:type' do
   # the params hash stores querystring and form data
   @player_throw = params[:type].to_sym
@@ -23,19 +24,22 @@ get '/throw/:type' do
 
   if @player_throw == @computer_throw 
     @answer = "There is a tie"
-    erb :result
+	 @img= "tie"
   elsif @player_throw == @defeat[@computer_throw]
-    @answer = "Computer wins; #{@computer_throw} defeats #{@player_throw}"
-    erb :result
+    @answer = "Sorry. #{@computer_throw} beats #{@player_throw}"
+	 @img= "sorry"
   else
     @answer = "Well done. #{@player_throw} beats #{@computer_throw}"
-    erb :result
+	 @img= "congrats"
   end
+  erb :result
 end
 
-post '/' do
-  @tirada = params[:eleccion]
-  redirect "/throw/#{@tirada}"
+post '/throw' do
+	@params = params[:eleccion]
+	if @params == "rock" || @params == "paper" || @params == "scissors"
+		redirect "/throw/#{@params}"
+	end
+	redirect "/"
 end
-
 

@@ -1,17 +1,16 @@
-<html>
-<head>
-<title>Rock Paper Scissors</title>
-</head>
-<body>
-<body style="background:#80BFFF">
-<br><br><br>
-<center><span style="color:#D70E33">
-<h2> Computer chooses: <%= @computer_throw %> </h2>
-<h2> You choose: <%= @player_throw %> </h2>
-<h1> <%= @answer %> </h1>
-<form action="/" method="get">
-<input name="try" type="submit" value="Try again"/>
-</form>
-</span></center>
-</body>
-</html>
+<center>
+	<br><br>
+	<img src="/img/<%= @computer_throw %>.jpg"  WIDTH=140 HEIGHT=240 alt="<%= @computer_throw %>" />
+	<img src="/img/versus.png"  WIDTH=100 HEIGHT=200 alt="versus" />
+	<img src="/img/<%= @player_throw %>.jpg"  WIDTH=140 HEIGHT=240 alt="<%= @player_throw %>" />
+	<br>
+	<h1> Computer chooses:  <%= @computer_throw %>.     You choose: <%= @player_throw %>. </h1>
+	<br>
+	<img src="/img/<%= @img %>.jpg"  WIDTH=280 HEIGHT=200 alt="<%= @img %>" />
+	<br><br>
+	<h1> <%= @answer %> </h1>
+	<br>
+	<form name="input" action="/" method="get">
+		<input type="submit" value="PLAY AGAIN"/>
+	</form>
+</center>
