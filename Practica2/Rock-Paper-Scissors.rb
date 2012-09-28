@@ -1,8 +1,9 @@
+require 'rubygems'
 require 'sinatra'
-require 'erb'
+require 'haml'
 
 enable :sessions
-# Las estadisticas se guardaran mientras este el servidor arrancado, y se acceda a localhost:4567/home
+
 # before we process a route we'll set the response as plain text
 # and set up an array of viable moves that a player (and the
 # computer) can perform
@@ -12,20 +13,22 @@ before do
 end
 
 get '/' do
-  session['wins'] = 0
-  session['ties'] = 0
-  session['losses'] = 0
-  @wins = session['wins']
-  @ties = session['ties']
-  @losses = session['losses']
-  erb :form
+	session['wins'] = 0
+	session['ties'] = 0
+	session['losses'] = 0
+	@wins = session['wins']
+	@ties = session['ties']
+	@losses = session['losses']
+	haml :form
 end
 
+
+#Mientras no se redireccione a '/', el servidor mantendrá guardados el valor de las variables del contador
 get '/home' do
   @wins = session['wins']
   @ties = session['ties']
   @losses = session['losses']
-  erb :form
+  haml :form
 end
 
 get '/throw/:type' do
@@ -49,7 +52,7 @@ get '/throw/:type' do
 	 @img= "congrats"
 	 session['wins'] += 1
   end
-  erb :result
+  haml :result
 end
 
 post '/throw' do
@@ -60,7 +63,8 @@ post '/throw' do
 	end
 	if @throws.include? @params
 		redirect "/throw/#{@params}"
+	else
+		redirect "/home"
 	end
-	redirect "/home"
 end
 
